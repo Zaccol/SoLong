@@ -6,7 +6,7 @@
 /*   By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 01:21:30 by lzaccome          #+#    #+#             */
-/*   Updated: 2021/12/01 06:14:45 by lzaccome         ###   ########.fr       */
+/*   Updated: 2021/12/05 21:08:37 by lzaccome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include "../mlx_linux/mlx.h"
 
 typedef struct s_stuff 
 {

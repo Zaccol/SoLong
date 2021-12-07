@@ -1,0 +1,5 @@
+*.o 
+*/*.o
+so_long
+a.out
+.DS_STORE

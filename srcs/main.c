@@ -6,7 +6,7 @@
 /*   By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 19:24:40 by lzaccome          #+#    #+#             */
-/*   Updated: 2021/12/01 06:20:01 by lzaccome         ###   ########.fr       */
+/*   Updated: 2021/12/02 01:20:37 by lzaccome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ char	**malloc_map(int fd, t_stuff *stuff)
 		free(line);
 		(stuff->line_count)++;
 		line = get_next_line(fd);
+			if (!line || line[0] == 0)
+		{
+			free(line);
+			error();
+		}
 		printf("line : %s\n", line);
 		// if (line_len != ft_strlen(line)) /* a ajouter aund les lignes sont recuperees */
 		// 	error();
@@ -114,12 +119,16 @@ void	get_map(int fd, char **map, t_stuff *stuff)
 
 	i = 0;
 	map[i] = get_next_line(fd);
+	if (!map[i])
+			free_map_exit(map, i, "Error : gnl failed\n");
 	printf("map : %s\n", map[i]);
 	// line_len = ft_strlen(map[i]);
 	i++;
 	while (i < stuff->line_count)
 	{
 		map[i] = get_next_line(fd);
+		if (!map[i])
+			free_map_exit(map, i, "Error : gnl failed\n");
 		printf("map : %s\n", map[i]);
 		if (ft_strlen(map[i]) != stuff->line_len)
 			free_map_exit(map, i, "Error : unrectangular map\n");

@@ -6,7 +6,7 @@
 /*   By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 02:07:37 by lzaccome          #+#    #+#             */
-/*   Updated: 2021/12/01 06:14:11 by lzaccome         ###   ########.fr       */
+/*   Updated: 2021/12/02 01:13:49 by lzaccome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ void	error_message(char *message)
 
 void	free_map_exit(char **map, int line_failed, char *message)
 {
-	int i;
-
-	i = 0;
-	while (i < line_failed)
+	while (line_failed >= 0)
 	{
-		free(map[i]);
-		i++;
+		free(map[line_failed]);
+		line_failed--;
 	}
 	free(map);
 	ft_putstr(message);
