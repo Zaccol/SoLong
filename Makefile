@@ -6,7 +6,7 @@
 #    By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/01 05:31:56 by lzaccome          #+#    #+#              #
-#    Updated: 2021/12/05 21:12:37 by lzaccome         ###   ########.fr        #
+#    Updated: 2021/12/10 04:21:44 by lzaccome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,15 @@ NAME = so_long
 
 CC = clang
 
-CFLAGS =  -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS =  -Wall -Wextra -Werror -g3
 
-SRCS =	test.c
-#srcs/main.c \
-#		srcs/get_next_line.c \
-#		srcs/gnl_utils.c \
-#		srcs/utils.c \
-#		srcs/error.c 
+SRCS =	srcs/main.c \
+		srcs/get_next_line.c \
+		srcs/gnl_utils.c \
+		srcs/utils.c \
+		srcs/error.c \
+		srcs/display_txt.c \
+		srcs/direction.c
 
 _GREY=	$'\033[1;30m
 _RED=	$'\033[1;31m

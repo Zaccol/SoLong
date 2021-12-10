@@ -6,7 +6,7 @@
 /*   By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 19:24:40 by lzaccome          #+#    #+#             */
-/*   Updated: 2021/12/02 01:20:37 by lzaccome         ###   ########.fr       */
+/*   Updated: 2021/12/10 19:45:36 by lzaccome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ char	**malloc_map(int fd, t_stuff *stuff)
 		free(line);
 		(stuff->line_count)++;
 		line = get_next_line(fd);
-			if (!line || line[0] == 0)
-		{
-			free(line);
-			error();
-		}
+		// 	if (!line || line[0] == 0)
+		// {
+		// 	free(line);
+		// 	error();
+		// }
 		printf("line : %s\n", line);
 		// if (line_len != ft_strlen(line)) /* a ajouter aund les lignes sont recuperees */
 		// 	error();
@@ -49,7 +49,7 @@ char	**malloc_map(int fd, t_stuff *stuff)
 	return (map);
 }
 
-int	is_wrong_elem(char c, t_stuff *stuff)
+int	is_wrong_elem(char c, t_stuff *stuff, int i, int j)
 {
 	if (c == '0')
 		return 0;
@@ -65,6 +65,8 @@ int	is_wrong_elem(char c, t_stuff *stuff)
 		stuff->player++;
 		if (stuff->player != 1)
 			return 1;
+		stuff->x = j;
+		stuff->y = i;
 		return 0;
 	}
 	else if (c == 'C')
@@ -102,7 +104,7 @@ void	parse_map(char **map, t_stuff *stuff)
 			else 
 				if ((j == 0 || j == stuff->line_len - 1) && map[i][j] != '1')
 					free_map_exit(map, stuff->line_count, "Error : unclosed map\n");
-				else if (is_wrong_elem(map[i][j], stuff))
+				else if (is_wrong_elem(map[i][j], stuff, i, j))
 					free_map_exit(map, stuff->line_count, "Error : invalid element in map\n");
 			j++;
 		}
@@ -131,7 +133,7 @@ void	get_map(int fd, char **map, t_stuff *stuff)
 			free_map_exit(map, i, "Error : gnl failed\n");
 		printf("map : %s\n", map[i]);
 		if (ft_strlen(map[i]) != stuff->line_len)
-			free_map_exit(map, i, "Error : unrectangular map\n");
+			free_map_exit2(map, i, "Error : unrectangular map\n");
 		i++;
 	}
 	parse_map(map, stuff);
@@ -172,7 +174,7 @@ int	main(int ac, char **av)
 	int		fd;
 	t_stuff stuff;
 	char	**map;
-	int i;
+	int		i;
 
 	i = 0;
 	init_stuff(&stuff);
@@ -189,6 +191,13 @@ int	main(int ac, char **av)
 		error();
 	get_map(fd, map, &stuff);
 	
+	while (i < stuff.line_count)
+	{
+		printf("map1 : %s\n", map[i]);
+		i++;
+	}
+	display_map(map, stuff);
+	i = 0;
 	while (i < stuff.line_count)
 	{
 		printf("map1 : %s\n", map[i]);

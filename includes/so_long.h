@@ -6,7 +6,7 @@
 /*   By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 01:21:30 by lzaccome          #+#    #+#             */
-/*   Updated: 2021/12/05 21:08:37 by lzaccome         ###   ########.fr       */
+/*   Updated: 2021/12/10 21:10:50 by lzaccome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,46 @@
 # include <fcntl.h>
 # include "../mlx_linux/mlx.h"
 
+/* -------------------------------------------------------------------------- */
+/*                                     MLX                                    */
+/* -------------------------------------------------------------------------- */
+
+#define FLOOR	"textures/floor.xpm"
+#define WALL	"textures/wall.xpm"
+#define PLAYER	"textures/player.xpm"
+#define COLLECT	"textures/collect.xpm"
+#define EXIT	"textures/exit.xpm"
+
+typedef struct s_img {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		h;
+	int		w;
+}				t_img;
+
+typedef struct s_txt {
+	t_img	floor;
+	t_img	wall;
+	t_img	collect;
+	t_img	exit;
+	t_img	player;
+}				t_txt;
+
+typedef struct	s_data {
+	void	*mlx;
+	void	*win;
+	t_txt	txt;
+	int		x;
+	int		y;
+}				t_data;
+
+/* -------------------------------------------------------------------------- */
+/*                                     PARSING                                */
+/* -------------------------------------------------------------------------- */
+
 typedef struct s_stuff 
 {
 	int line_count;
@@ -26,7 +66,16 @@ typedef struct s_stuff
 	int player;
 	int collectible;
 	int exit;
-} t_stuff;
+	int x;
+	int y;
+}				t_stuff;
+
+typedef struct s_combo {
+	t_data	*mlx;
+	t_stuff	*stuff;
+	char	**map;
+	int		count;
+}				t_combo;
 
 /* -------------------------------------------------------------------------- */
 /*                              FILE = ./gnl_utils.c                          */
@@ -50,11 +99,28 @@ char	*get_next_line(int fd);
 void	error(void);
 void	free_map(char **map, int line_count);
 void	free_map_exit(char **map, int line_count, char *message);
+void	free_map_exit2(char **map, int line_failed, char *message);
 void	error_message(char *message);
 
 /* -------------------------------------------------------------------------- */
 /*                              FILE = ./utils.c                              */
 /* -------------------------------------------------------------------------- */
 void	ft_putstr(char *str);
+
+/* -------------------------------------------------------------------------- */
+/*                              FILE = ./display_txt.c                        */
+/* -------------------------------------------------------------------------- */
+void	free_mlx(t_data *mlx);
+int		ft_cross(t_data *mlx);
+void	init_txt(t_data *mlx, t_img *txt, char *path);
+void	get_txt(t_data *mlx);
+void	display_map(char **map, t_stuff stuff);
+int		ft_close(int keycode, t_data *mlx);
+void	put_txt(char **map, t_data mlx, t_stuff stuff);
+
+/* -------------------------------------------------------------------------- */
+/*                              FILE = ./direction.c                          */
+/* -------------------------------------------------------------------------- */
+int		direction(int keycode, t_combo *combo);
 
 #endif
