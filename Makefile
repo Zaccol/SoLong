@@ -6,7 +6,7 @@
 #    By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/01 05:31:56 by lzaccome          #+#    #+#              #
-#    Updated: 2021/12/10 04:21:44 by lzaccome         ###   ########.fr        #
+#    Updated: 2021/12/11 20:46:33 by lzaccome         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = so_long
 
 CC = clang
 
-CFLAGS =  -Wall -Wextra -Werror -g3
+CFLAGS =  -Wall -Wextra -Werror
 
 SRCS =	srcs/main.c \
 		srcs/get_next_line.c \
@@ -22,6 +22,9 @@ SRCS =	srcs/main.c \
 		srcs/utils.c \
 		srcs/error.c \
 		srcs/display_txt.c \
+		srcs/parse.c \
+		srcs/init_txts.c \
+		srcs/win.c \
 		srcs/direction.c
 
 _GREY=	$'\033[1;30m
@@ -34,7 +37,7 @@ _CYAN=	$'\033[1;36m
 _WHITE=	$'\033[1;37m
 
 OBJ = $(SRCS:.c=.o)
-MLX = -I /usr/include -L /usr/lib/ -lmlx -Lmlx_linux -Imlx_linux -lXext -lX11 -lm -lz
+MLX = -lmlx -Lmlx_linux -Imlx_linux -lXext -lX11 -lm -lz
 
 all: $(NAME)
 

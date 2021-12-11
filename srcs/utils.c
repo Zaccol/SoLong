@@ -6,7 +6,7 @@
 /*   By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 02:01:29 by lzaccome          #+#    #+#             */
-/*   Updated: 2021/12/01 05:35:05 by lzaccome         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:43:51 by lzaccome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,5 @@ void	ft_putstr(char *str)
 		write(1, str, 1);
 		str++;
 	}
-	return;
+	return ;
 }

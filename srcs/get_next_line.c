@@ -6,7 +6,7 @@
 /*   By: lzaccome <lzaccome@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 01:14:29 by lzaccome          #+#    #+#             */
-/*   Updated: 2021/12/01 05:34:56 by lzaccome         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:58:19 by lzaccome         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,12 @@ char	*get_next_line(int fd)
 
 	i = 0;
 	ret_read = 0;
-	line = NULL;
 	line = ft_strcdup(buf, '\n');
 	while (strchr_backslash(buf, i))
 	{
 		ret_read = read(fd, buf, BUFFER_SIZE);
 		if (ret_read < 0)
-			error();
+			free_line(line);
 		buf[ret_read] = 0;
 		line = ft_strcjoin(line, buf, '\n');
 		i++;
@@ -87,25 +86,8 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int	main(int ac, char **av)
-// {
-// 	(void)ac;
-// 	(void)av;
-// 	int fd;
-// 	char *s;
-
-// 	fd = open("file1", O_RDONLY);
-// 	if (fd == -1)
-// 	{
-// 		printf("fd error\n");
-// 		return (0);
-// 	}
-// 	s = "";
-// 	while (s)
-// 	{
-// 		s = get_next_line(fd);
-// 		printf("write : %s\n", s);
-// 		free(s);
-// 	}
-// 	return (1);
-// }
+void	free_line(char *line)
+{
+	free(line);
+	error();
+}
